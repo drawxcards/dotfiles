@@ -15,21 +15,20 @@ echo "Getting pubkey from github..."
 mkdir -p ~/.ssh
 # if id_rsa.pub doesn't exist
 if [ ! -f ~/.ssh/id_rsa.pub ]; then
-    curl https://github.com/gddabe.keys | tee -a ~/.ssh/id_rsa.pub
+    curl https://github.com/drawxcards.keys | tee -a ~/.ssh/drawxcards.pub
 fi
 
 echo "Cleaning up the dock..."
 dockutil --no-restart --remove all
-dockutil --no-restart --add "/Applications/Google Chrome.app"
-dockutil --no-restart --add "/Applications/Hyper.app"
+dockutil --no-restart --add "/Applications/Brave Browser.app"
+dockutil --no-restart --add "/Applications/Visual Studio Code.app"
+dockutil --no-restart --add "/Applications/iTerm.app"
 
 killall Dock
 
-ln -sf ~/.dotfiles/hammerspoon ~/.hammerspoon
 ln -sf ~/.dotfiles/.gitignore ~/.gitignore
 ln -sf ~/.dotfiles/.gitconfig ~/.gitconfig
 ln -sf ~/.dotfiles/.editorconfig ~/.editorconfig
-ln -sf ~/.dotfiles/.hyper.js ~/.hyper.js
 ln -sf ~/.dotfiles/.zshrc ~/.zshrc
 
 echo "Making zsh the default shell..."
