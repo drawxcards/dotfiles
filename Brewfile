@@ -28,9 +28,9 @@ cask 'iterm2'
 cask 'visual-studio-code'
 cask 'iina'
 cask 'tree'
-#cask 'stats'
+cask 'stats'
 #cask 'rectangle'
-#cask 'itsycal'
+cask 'itsycal'
 
 # Fonts
 cask 'font-fira-code-nerd-font'

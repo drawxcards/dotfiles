@@ -41,21 +41,11 @@ ln -sf ~/.dotfiles/init.lua ~/.hammerspoon/init.lua
 
 - copy all files in .ssh folder from old machine to new machine
 
-### Bitwarden
-
-#### Bitwarden app - install app store version to allow bio browser integration setting
-
-- unlock with touch id
-- allow browser integration
-- allow duckduckgo browser integration
-
-#### Browser extension setting
-
-- In your Browser, navigate to the extensions manager (e.g. chrome://extensions or brave://extensions), open Bitwarden, and toggle the Allow access to file URLs option.
-- In your browser extension, open the  Settings tab
-- Scroll down to the security section and check the Unlock with biometrics box.
-
 ### Brave
 
 - go to brave://settings/shields/filters and type `cookie`
 - check EasyList-Cookie List to disable cookie questions
+
+### Karabiner-Elements
+
+- karabiner://karabiner/assets/complex_modifications/import?url=https://raw.githubusercontent.com/Vonng/Capslock/master/mac_v3/capslock.json
