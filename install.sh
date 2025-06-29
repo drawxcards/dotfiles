@@ -26,9 +26,9 @@ fi
 
 killall Dock
 
-ln -sf ~/.dotfiles/.gitignore ~/.gitignore
-ln -sf ~/.dotfiles/.gitconfig ~/.gitconfig
-ln -sf ~/.dotfiles/.editorconfig ~/.editorconfig
+ln -sf ~/.dotfiles/config/gitignore ~/.gitignore
+ln -sf ~/.dotfiles/config/gitconfig ~/.gitconfig
+ln -sf ~/.dotfiles/config/editorconfig ~/.editorconfig
 ln -sf ~/.dotfiles/.zshrc ~/.zshrc
 
 echo "Making zsh the default shell..."
