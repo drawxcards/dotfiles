@@ -14,15 +14,15 @@ yes | $(brew --prefix)/opt/fzf/install
 echo "Getting pubkey from github..."
 mkdir -p ~/.ssh
 # if id_rsa.pub doesn't exist
-if [ ! -f ~/.ssh/id_rsa.pub ]; then
+if [ ! -f ~/.ssh/drawxcards.pub ]; then
     curl https://github.com/drawxcards.keys | tee -a ~/.ssh/drawxcards.pub
 fi
 
-echo "Cleaning up the dock..."
-dockutil --no-restart --remove all
-dockutil --no-restart --add "/Applications/Brave Browser.app"
-dockutil --no-restart --add "/Applications/Visual Studio Code.app"
-dockutil --no-restart --add "/Applications/iTerm.app"
+# echo "Cleaning up the dock..."
+# dockutil --no-restart --remove all
+# dockutil --no-restart --add "/Applications/Brave Browser.app"
+# dockutil --no-restart --add "/Applications/Visual Studio Code.app"
+# dockutil --no-restart --add "/Applications/iTerm.app"
 
 killall Dock
 
