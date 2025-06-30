@@ -10,6 +10,7 @@ brew 'z'
 brew 'nvm'
 brew 'btop'
 brew 'dust'
+brew 'gnupg'
 brew 'lsd' # replace exa as it is demised
 
 # Zsh
