@@ -100,6 +100,31 @@ function reduce() {
   done
 }
 
+backup_ssh() {
+  local backup_dir="$HOME/Library/Mobile Documents/com~apple~CloudDocs/For Mac Setup"
+  local backup_tar="ssh_config.tar.gz"
+  local backup_gpg="ssh_config.tar.gz.gpg"
+  mkdir -p "$backup_dir"
+  tar -czf "$backup_dir/$backup_tar" -C "$HOME" .ssh && \
+  gpg -c --cipher-algo AES256 "$backup_dir/$backup_tar" && \
+  rm -f "$backup_dir/$backup_tar"
+  echo "Backup complete: $backup_dir/$backup_gpg"
+}
+
+restore_ssh() {
+  local backup_dir="$HOME/Library/Mobile Documents/com~apple~CloudDocs/For Mac Setup"
+  local backup_tar="ssh_config.tar.gz"
+  local backup_gpg="ssh_config.tar.gz.gpg"
+  if [ ! -f "$backup_dir/$backup_gpg" ]; then
+    echo "Encrypted backup $backup_dir/$backup_gpg not found!"
+    return 1
+  fi
+  gpg -d "$backup_dir/$backup_gpg" > "$backup_dir/$backup_tar" && \
+  tar -xzf "$backup_dir/$backup_tar" -C "$HOME" && \
+  rm -f "$backup_dir/$backup_tar"
+  echo ".ssh folder restored from $backup_dir/$backup_gpg"
+}
+
 # # Only list out directory > 300M and sort them
 # function fss() {
 #   if du -b /dev/null > /dev/null 2>&1; then
