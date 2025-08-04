@@ -22,4 +22,4 @@ source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 [[ -f ~/.dotfiles/.aliases ]] && source ~/.dotfiles/.aliases
 [[ -f ~/.dotfiles/.functions ]] && source ~/.dotfiles/.functions
 
-ssh-add --apple-load-keychain
+ssh-add --apple-load-keychain 2>/dev/null
