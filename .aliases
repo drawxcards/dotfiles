@@ -12,6 +12,8 @@ alias .....="cd ../../../.."
 # alias qpdfcompress='qpdf --stream-data=compress --object-streams=generate $1 -'
 alias ls=' lsd'
 
+# Copy pubkey to pasteboard
+alias pubkey="more ~/.ssh/draco.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
 
 # alias ls=' exa'
 # alias l=' exa -l'
@@ -41,13 +43,8 @@ alias ls=' lsd'
 # # Backup
 # alias backup='rsync -ahvP --exclude=".DS_Store"'
 
-
-
 # # Print each PATH entry on a separate line
 # alias path='echo -e ${PATH//:/\\n}'
-
-# # Copy pubkey to pasteboard
-# alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
 
 # alias mp4="youtube-dl -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4'"
 # alias mp3="youtube-dl -x --audio-format mp3"
