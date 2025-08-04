@@ -11,21 +11,6 @@ brew bundle install
 echo "Installing fzf integration..."
 yes | $(brew --prefix)/opt/fzf/install
 
-echo "Getting pubkey from github..."
-mkdir -p ~/.ssh
-# if id_rsa.pub doesn't exist
-if [ ! -f ~/.ssh/drawxcards.pub ]; then
-    curl https://github.com/drawxcards.keys | tee -a ~/.ssh/drawxcards.pub
-fi
-
-# echo "Cleaning up the dock..."
-# dockutil --no-restart --remove all
-# dockutil --no-restart --add "/Applications/Brave Browser.app"
-# dockutil --no-restart --add "/Applications/Visual Studio Code.app"
-# dockutil --no-restart --add "/Applications/iTerm.app"
-
-killall Dock
-
 ln -sf ~/.dotfiles/config/gitignore ~/.gitignore
 ln -sf ~/.dotfiles/config/gitconfig ~/.gitconfig
 ln -sf ~/.dotfiles/config/editorconfig ~/.editorconfig
