@@ -10,7 +10,11 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
 # alias qpdfcompress='qpdf --stream-data=compress --object-streams=generate $1 -'
-alias ls=' lsd'
+# alias ls=' lsd'
+alias ls=' eza -lX --color=always'
+alias la=' eza -laX --color=always'
+alias ll=' eza -lT --level 2'
+alias lll=' eza -lT --level 3'
 
 # Copy pubkey to pasteboard
 alias pubkey="more ~/.ssh/draco.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
