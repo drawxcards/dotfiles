@@ -26,8 +26,8 @@ fi
 
 
 # Dotfiles
-[[ -f ~/.dotfiles/.aliases ]] && source ~/.dotfiles/.aliases
-[[ -f ~/.dotfiles/.functions ]] && source ~/.dotfiles/.functions
+[[ -f ~/.dotfiles/shell/.aliases ]] && source ~/.dotfiles/shell/.aliases
+[[ -f ~/.dotfiles/shell/.functions ]] && source ~/.dotfiles/shell/.functions
 
 ssh-add --apple-load-keychain 2>/dev/null
 
