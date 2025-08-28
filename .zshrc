@@ -18,6 +18,12 @@ source $(brew --prefix)/etc/profile.d/z.sh
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
+if command -v fzf >/dev/null; then
+	if fzf --zsh >/dev/null; then
+		source <(fzf --zsh)
+	fi
+fi
+
 # Dotfiles
 [[ -f ~/.dotfiles/.aliases ]] && source ~/.dotfiles/.aliases
 [[ -f ~/.dotfiles/.functions ]] && source ~/.dotfiles/.functions

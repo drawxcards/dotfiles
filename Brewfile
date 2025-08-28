@@ -12,6 +12,7 @@ brew 'btop'
 brew 'dust'
 brew 'gnupg'
 brew 'lsd' # replace exa as it is demised
+brew 'fzf'
 
 # Zsh
 brew 'zsh'

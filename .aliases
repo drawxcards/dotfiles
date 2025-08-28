@@ -14,6 +14,7 @@ alias ls=' lsd'
 
 # Copy pubkey to pasteboard
 alias pubkey="more ~/.ssh/draco.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
+alias fzfp="fzf --style full --preview 'fzf-preview.sh {}' --bind 'focus:transform-header:file --brief {}'"
 
 # alias ls=' exa'
 # alias l=' exa -l'
