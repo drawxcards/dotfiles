@@ -138,11 +138,13 @@ After running the installation script, configure iTerm2 to use the custom prefer
 
 ```bash
 # Specify the preferences directory
-defaults write com.googlecode.iterm2 PrefsCustomFolder -string "~/.dotfiles/terminal/iterm2"
+defaults write com.googlecode.iterm2 PrefsCustomFolder -string "~/.iterm2"
 
 # Tell iTerm2 to use the custom preferences in the directory
 defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
 ```
+
+**Note:** Restart iTerm2 after running these commands for the changes to take effect.
 
 ## 🛠️ Components
 

@@ -234,8 +234,23 @@ if prompt_user "Create symlinks for configuration files?"; then
     create_symlink "$DOTFILES_DIR/shell/.functions" "$HOME/.functions"
     create_symlink "$DOTFILES_DIR/shell/.history" "$HOME/.history"
 
-    # Terminal configuration
-    create_symlink "$DOTFILES_DIR/terminal/iterm2" "$HOME/.iterm2"
+    # Terminal configuration - iTerm2
+    # Create .iterm2 directory if it doesn't exist
+    if ! $DRY_RUN && [ ! -d "$HOME/.iterm2" ]; then
+        execute mkdir -p "$HOME/.iterm2"
+        print_status "Created iTerm2 preferences directory: $HOME/.iterm2"
+    elif $DRY_RUN; then
+        print_dry_run "Would create directory: $HOME/.iterm2"
+    fi
+
+    # Symlink the plist file directly into the .iterm2 directory
+    create_symlink "$DOTFILES_DIR/terminal/iterm2/com.googlecode.iterm2.plist" "$HOME/.iterm2/com.googlecode.iterm2.plist"
+
+    # Configure iTerm2 to use the custom preferences directory
+    print_status "Configuring iTerm2 preferences..."
+    execute defaults write com.googlecode.iterm2 PrefsCustomFolder -string "$HOME/.iterm2"
+    execute defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
+    print_status "iTerm2 preferences configured"
 
     print_status "All symlinks created successfully"
 else
@@ -299,7 +314,7 @@ symlink_targets=(
     "$HOME/.aliases:$DOTFILES_DIR/shell/.aliases"
     "$HOME/.functions:$DOTFILES_DIR/shell/.functions"
     "$HOME/.history:$DOTFILES_DIR/shell/.history"
-    "$HOME/.iterm2:$DOTFILES_DIR/terminal/iterm2"
+    "$HOME/.iterm2/com.googlecode.iterm2.plist:$DOTFILES_DIR/terminal/iterm2/com.googlecode.iterm2.plist"
 )
 
 for target_pair in "${symlink_targets[@]}"; do
