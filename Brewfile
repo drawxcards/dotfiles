@@ -11,7 +11,7 @@ brew 'nvm'
 brew 'btop'
 brew 'dust'
 brew 'gnupg'
-brew 'lsd' # replace exa as it is demised
+brew 'eza' # modern replacement for ls with better features
 brew 'fzf'
 
 # Zsh

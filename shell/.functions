@@ -12,9 +12,8 @@ function cdf() { # short for `cdfinder`
 function www() {
   local port="${1:-8000}";
   sleep 1 && open "http://localhost:${port}/" &
-  # Set the default Content-Type to `text/plain` instead of `application/octet-stream`
-  # And serve everything as UTF-8 (although not technically correct, this doesn’t break anything for binary files)
-  python -c $'import SimpleHTTPServer;\nmap = SimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map;\nmap[""] = "text/plain";\nfor key, value in map.items():\n\tmap[key] = value + ";charset=UTF-8";\nSimpleHTTPServer.test();' "$port";
+  # Use Python 3's built-in HTTP server
+  python3 -m http.server "$port";
 }
 
 function ramdisk() {
@@ -101,28 +100,48 @@ function reduce() {
 }
 
 backup_ssh() {
-  local backup_dir="$HOME/Library/Mobile Documents/com~apple~CloudDocs/For Mac Setup"
+  local backup_dir="${SSH_BACKUP_DIR:-$HOME/Documents/SSH_Backup}"
   local backup_tar="ssh_config.tar.gz"
   local backup_gpg="ssh_config.tar.gz.gpg"
+
+  if [ ! -d "$HOME/.ssh" ]; then
+    echo "No .ssh directory found to backup"
+    return 1
+  fi
+
   mkdir -p "$backup_dir"
-  tar -czf "$backup_dir/$backup_tar" -C "$HOME" .ssh && \
-  gpg -c --cipher-algo AES256 "$backup_dir/$backup_tar" && \
-  rm -f "$backup_dir/$backup_tar"
-  echo "Backup complete: $backup_dir/$backup_gpg"
+  if tar -czf "$backup_dir/$backup_tar" -C "$HOME" .ssh; then
+    if gpg -c --cipher-algo AES256 "$backup_dir/$backup_tar"; then
+      rm -f "$backup_dir/$backup_tar"
+      echo "SSH backup complete: $backup_dir/$backup_gpg"
+    else
+      echo "Failed to encrypt backup"
+      return 1
+    fi
+  else
+    echo "Failed to create backup archive"
+    return 1
+  fi
 }
 
 restore_ssh() {
-  local backup_dir="$HOME/Library/Mobile Documents/com~apple~CloudDocs/For Mac Setup"
+  local backup_dir="${SSH_BACKUP_DIR:-$HOME/Documents/SSH_Backup}"
   local backup_tar="ssh_config.tar.gz"
   local backup_gpg="ssh_config.tar.gz.gpg"
+
   if [ ! -f "$backup_dir/$backup_gpg" ]; then
     echo "Encrypted backup $backup_dir/$backup_gpg not found!"
     return 1
   fi
-  gpg -d "$backup_dir/$backup_gpg" > "$backup_dir/$backup_tar" && \
-  tar -xzf "$backup_dir/$backup_tar" -C "$HOME" && \
-  rm -f "$backup_dir/$backup_tar"
-  echo ".ssh folder restored from $backup_dir/$backup_gpg"
+
+  if gpg -d "$backup_dir/$backup_gpg" > "$backup_dir/$backup_tar" && \
+     tar -xzf "$backup_dir/$backup_tar" -C "$HOME" && \
+     rm -f "$backup_dir/$backup_tar"; then
+    echo "SSH configuration restored from $backup_dir/$backup_gpg"
+  else
+    echo "Failed to restore SSH configuration"
+    return 1
+  fi
 }
 
 # # Only list out directory > 300M and sort them

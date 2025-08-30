@@ -1,55 +1,63 @@
-# Brew update
+# System maintenance
 alias update="brew update && brew outdated && brew upgrade && brew cleanup"
-
-# Reload the shell (i.e. invoke as a login shell)
 alias reload="source ~/.zshrc"
 
+# Navigation
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
-# alias qpdfcompress='qpdf --stream-data=compress --object-streams=generate $1 -'
-# alias ls=' lsd'
-alias ls=' eza -lX --color=always'
-alias la=' eza -laX --color=always'
-alias ll=' eza -lT --level 2'
-alias lll=' eza -lT --level 3'
+# File listing (using eza - modern replacement for ls)
+alias ls='eza -lX --color=always'
+alias la='eza -laX --color=always'
+alias ll='eza -lT --level 2'
+alias lll='eza -lT --level 3'
+alias lrt='eza -l --sort newest'
+alias lart='eza -la --sort newest'
 
-# Copy pubkey to pasteboard
-alias pubkey="more ~/.ssh/draco.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
+# SSH and security
+SSH_KEY_PATH="${SSH_KEY_PATH:-$HOME/.ssh/id_rsa.pub}"
+alias pubkey="more \"$SSH_KEY_PATH\" | pbcopy | echo '=> Public key copied to pasteboard.'"
+
+# Fzf integration
 alias fzfp="fzf --style full --preview 'fzf-preview.sh {}' --bind 'focus:transform-header:file --brief {}'"
 
-# alias ls=' exa'
-# alias l=' exa -l'
-# alias ll=' exa -lT --level 2'
-# alias lll=' exa -lT --level 3'
+# History
+alias h='fc -il 1'
 
-# alias lrt=' exa -l --icons --sort newest'
-# alias lart=' exa -la --icons --sort newest'
+# Enable aliases to be sudo'ed
+alias sudo='sudo '
 
-# # Show history with timestamp
-# alias h=' fc -il 1'
+# Finder controls
+alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
+alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
+alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
+alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
 
-# # Enable aliases to be sudo’ed
-# # alias sudo='sudo '
+# System utilities
+alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+alias path='echo -e ${PATH//:/\\n}'
 
-# # Show/hide hidden files in Finder
-# alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
-# alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
+# Backup utility
+alias backup='rsync -ahvP --exclude=".DS_Store"'
 
-# # Show/hide all desktop icons (useful when presenting)
-# alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
-# alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
+# Media conversion (if youtube-dl is available)
+if command -v yt-dlp >/dev/null 2>&1; then
+    alias mp4="yt-dlp -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4'"
+    alias mp3="yt-dlp -x --audio-format mp3"
+elif command -v youtube-dl >/dev/null 2>&1; then
+    alias mp4="youtube-dl -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4'"
+    alias mp3="youtube-dl -x --audio-format mp3"
+fi
 
-# # Lock the screen (when going AFK)
-# alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+# Git shortcuts
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit'
+alias gp='git push'
+alias gl='git log --oneline'
 
-# # Backup
-# alias backup='rsync -ahvP --exclude=".DS_Store"'
-
-# # Print each PATH entry on a separate line
-# alias path='echo -e ${PATH//:/\\n}'
-
-# alias mp4="youtube-dl -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4'"
-# alias mp3="youtube-dl -x --audio-format mp3"
+# Development shortcuts
+alias python='python3'
+alias pip='pip3'

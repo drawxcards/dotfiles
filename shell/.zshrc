@@ -1,36 +1,48 @@
+# Path and environment setup
 fpath+=("$(brew --prefix)/share/zsh/site-functions")
 export PATH="/usr/local/opt/python@3.10/libexec/bin:$PATH"
 
-# Lazy-load nvm
+# Lazy-load nvm for better performance
 export NVM_DIR="$HOME/.nvm"
 nvm() {
   unset -f nvm
-  source $(brew --prefix nvm)/nvm.sh
+  [ -s "$(brew --prefix nvm)/nvm.sh" ] && source "$(brew --prefix nvm)/nvm.sh"
   nvm "$@"
 }
 
-# Prompt
-autoload -U promptinit; promptinit
+# Prompt setup
+autoload -U promptinit && promptinit
 prompt pure
 
-# Performance improvements
-source $(brew --prefix)/etc/profile.d/z.sh
-source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# Zsh plugins and performance improvements
+[ -f "$(brew --prefix)/etc/profile.d/z.sh" ] && source "$(brew --prefix)/etc/profile.d/z.sh"
+[ -f "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && \
+  source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+[ -f "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && \
+  source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
-if command -v fzf >/dev/null; then
-	if fzf --zsh >/dev/null; then
-		source <(fzf --zsh)
-	fi
+# Fzf integration
+if command -v fzf >/dev/null 2>&1; then
+  if fzf --zsh >/dev/null 2>&1; then
+    source <(fzf --zsh)
+  fi
 fi
 
+# Completion settings
+autoload -Uz compinit && compinit
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
-# Dotfiles
+# History search
+bindkey '^R' history-incremental-search-backward
+
+# Load dotfiles configuration
+[[ -f ~/.dotfiles/shell/.history ]] && source ~/.dotfiles/shell/.history
 [[ -f ~/.dotfiles/shell/.aliases ]] && source ~/.dotfiles/shell/.aliases
 [[ -f ~/.dotfiles/shell/.functions ]] && source ~/.dotfiles/shell/.functions
 
-ssh-add --apple-load-keychain 2>/dev/null
-
+# SSH keychain integration
+ssh-add --apple-load-keychain 2>/dev/null || true
 
 # ---------------------
 # eza universal Dracula
