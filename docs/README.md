@@ -82,6 +82,56 @@ git config --global user.signingkey YOUR_KEY_ID
 git config --global commit.gpgsign true
 ```
 
+### Post-Installation Verification
+
+Verify that everything is working correctly:
+
+```bash
+# Check shell configuration
+echo $SHELL
+which zsh
+
+# Check git configuration
+git config --list --show-origin | head -10
+
+# Check key development tools
+which gh && gh --version
+which jq && jq --version
+which eza && eza --version
+which ripgrep && rg --version
+
+# Check Docker (if installed)
+which docker && docker --version
+
+# Verify SSH permissions (should be 600 for private key)
+ls -la ~/.ssh/
+
+# Test git aliases
+git aliases | head -5
+```
+
+### Customization
+
+#### Changing Default Editor
+
+```bash
+# Set VS Code as default editor
+git config --global core.editor "code --wait"
+
+# Set Vim as default editor
+git config --global core.editor "vim"
+```
+
+#### Adjusting History Size
+
+```bash
+# Change history size (default: 10000)
+git config --global core.pager "less -FX"
+
+# Adjust diff colors
+git config --global color.diff.meta "yellow bold"
+```
+
 ### Manual iTerm2 Setup
 
 After running the installation script, configure iTerm2 to use the custom preferences:

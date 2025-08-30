@@ -269,7 +269,23 @@ else
     print_warning "Skipping Zsh default shell setup"
 fi
 
-# Module 5: Post-Installation Verification
+# Module 5: Security Setup
+print_status "Setting up security measures..."
+
+# Set proper permissions for SSH directory if it exists
+if [ -d "$HOME/.ssh" ]; then
+    print_status "Setting SSH directory permissions..."
+    execute chmod 700 "$HOME/.ssh"
+    if [ -f "$HOME/.ssh/id_rsa" ]; then
+        execute chmod 600 "$HOME/.ssh/id_rsa"
+    fi
+    if [ -f "$HOME/.ssh/id_rsa.pub" ]; then
+        execute chmod 644 "$HOME/.ssh/id_rsa.pub"
+    fi
+    print_status "SSH permissions configured"
+fi
+
+# Module 6: Post-Installation Verification
 print_status "Running post-installation verification..."
 
 verification_passed=true

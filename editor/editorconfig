@@ -2,11 +2,46 @@ root = true
 
 [*]
 charset = utf-8
-indent_style = tab
+indent_style = space
+indent_size = 2
 end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
 
+# Web development
+[*.{js,jsx,ts,tsx,html,css,scss,less,json,md}]
+indent_style = space
+indent_size = 2
+
+# Python
+[*.{py,pyw}]
+indent_style = space
+indent_size = 4
+max_line_length = 88
+
+# System languages
+[*.{java,c,cpp,h,hpp}]
+indent_style = space
+indent_size = 4
+
+# Go
+[*.go]
+indent_style = tab
+indent_size = 4
+
+# Infrastructure
 [*.{yaml,yml}]
 indent_style = space
 indent_size = 2
+
+# Makefiles and shell scripts
+[Makefile]
+indent_style = tab
+
+[{*.mk,*.sh}]
+indent_style = space
+indent_size = 4
+
+# Windows scripts
+[*.{bat,cmd}]
+end_of_line = crlf
