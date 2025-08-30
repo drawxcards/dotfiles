@@ -57,3 +57,59 @@ Thumbs.db
 # Brew generated files #
 ########################
 Brewfile.lock.json
+
+# Modern Development Tools #
+############################
+.vscode/settings.json
+.vscode/launch.json
+.idea/
+*.swp
+*.swo
+*~
+
+# Container & Orchestration #
+#############################
+.dockerignore
+docker-compose.override.yml
+kubernetes/
+helm/
+
+# AI/ML & Data Science #
+########################
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+*.h5
+*.pkl
+*.joblib
+*.model
+
+# Node.js Modern #
+##################
+.pnpm-debug.log*
+.yarn-integrity
+.parcel-cache/
+.next/
+.nuxt/
+.cache/
+
+# Cloud & Infrastructure #
+##########################
+.terraform/
+*.tfstate
+*.tfvars
+serverless/
+
+# Mobile Development #
+######################
+*.apk
+*.ipa
+*.mobileprovision
+fastlane/
+
+# Documentation #
+#################
+docs/_build/
+*.pdf
+*.docx

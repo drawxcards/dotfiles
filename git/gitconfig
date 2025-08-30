@@ -1,7 +1,10 @@
 [user]
+	name = drawxcards
+	email = drawxcards@gmail.com
 
-		name = drawxcards
-		email = drawxcards@gmail.com
+		# Configure your git user information
+		# name = Your Name
+		# email = your.email@example.com
 
 [alias]
 
@@ -68,8 +71,33 @@
 		fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
 
 		# Remove branches that have already been merged with master
-		# a.k.a. ‘delete merged’
+		# a.k.a. 'delete merged'
 		dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+
+		# Branch management
+		bclean = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+		bcleanr = "!git branch -r --merged | grep -v '\\*' | sed 's/origin\\///' | xargs -n 1 git branch -r -d origin/"
+
+		# Advanced operations
+		amend = commit --amend --no-edit
+		wip = "!git add -A && git commit -m 'WIP'"
+		unwip = reset HEAD~1
+
+		# Information
+		authors = shortlog -sn --no-merges
+		contribution = "!git shortlog -sn --no-merges | head -10"
+
+		# Advanced diff
+		dlast = diff HEAD~1
+		dcache = diff --cached
+
+		# Stashing
+		sl = stash list
+		sp = stash pop
+		ss = "!git stash show -p"
+
+		# Advanced status
+		root = rev-parse --show-toplevel
 
 		# List contributors with number of commits
 		contributors = shortlog --summary --numbered
@@ -117,9 +145,25 @@
 		# Speed up commands involving untracked files such as `git status`.
 		# https://git-scm.com/docs/git-update-index#_untracked_cache
 		untrackedCache = true
-	autocrlf = false
-	eol = LF
-	fileMode = false
+		autocrlf = false
+		eol = LF
+		fileMode = false
+
+	[maintenance]
+		# Automatic maintenance for better performance
+		auto = true
+		strategy = incremental
+
+	[feature]
+		# Better performance with many files
+		manyFiles = true
+
+	[rerere]
+		# Reuse recorded resolution of conflicted merges
+		enabled = true
+
+	[core]
+		fsmonitor = true
 
 [color]
 

@@ -54,6 +54,34 @@ The script will:
 - Create symbolic links for all configuration files
 - Set zsh as the default shell
 
+### Git Configuration
+
+After running the installation script, configure your git user information:
+
+```bash
+# Set your git user name
+git config --global user.name "Your Name"
+
+# Set your git user email
+git config --global user.email "your.email@example.com"
+```
+
+**Optional: GPG Commit Signing**
+
+If you want to sign your commits with GPG:
+
+```bash
+# Generate a new GPG key
+gpg --full-generate-key
+
+# List your GPG keys
+gpg --list-secret-keys --keyid-format=long
+
+# Configure git to use your GPG key
+git config --global user.signingkey YOUR_KEY_ID
+git config --global commit.gpgsign true
+```
+
 ### Manual iTerm2 Setup
 
 After running the installation script, configure iTerm2 to use the custom preferences:
@@ -129,7 +157,7 @@ defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
 **CLI Tools:**
 
 - `git`, `coreutils`, `tldr`, `bat`, `z`, `nvm`
-- `btop`, `dust`, `gnupg`, `lsd`, `fzf`
+- `btop`, `dust`, `gnupg`, `eza`, `fzf`
 
 **Shell:**
 
