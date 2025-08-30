@@ -158,6 +158,7 @@ defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
 
 - `git`, `coreutils`, `tldr`, `bat`, `z`, `nvm`
 - `btop`, `dust`, `gnupg`, `eza`, `fzf`
+- `gh`, `jq`, `ripgrep`, `fd`, `htop`, `tree`
 
 **Shell:**
 
@@ -168,6 +169,9 @@ defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
 - `brave-browser`, `google-chrome`
 - `visual-studio-code`, `iterm2`
 - `karabiner-elements` for keyboard customization
+- `docker` for container development
+- `postman` for API testing
+- `rectangle` for window management
 
 **Fonts:**
 

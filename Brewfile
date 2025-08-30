@@ -14,6 +14,14 @@ brew 'gnupg'
 brew 'eza' # modern replacement for ls with better features
 brew 'fzf'
 
+# Essential Development Tools
+brew 'gh' # GitHub CLI
+brew 'jq' # JSON processor
+brew 'ripgrep' # fast text search
+brew 'fd' # simple find replacement
+brew 'htop' # better process monitor
+brew 'tree' # directory tree viewer
+
 # Zsh
 brew 'zsh'
 brew 'zsh-syntax-highlighting'
@@ -30,6 +38,9 @@ cask 'visual-studio-code'
 cask 'iina'
 cask 'stats'
 cask 'itsycal'
+
+# Development Tools
+cask 'postman' # API testing
 
 # Fonts
 cask 'font-fira-code-nerd-font'
