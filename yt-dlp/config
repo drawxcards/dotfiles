@@ -1,0 +1,43 @@
+# ─────────────────────────────
+# Audio Quality & Format
+# ─────────────────────────────
+# Pick best audio stream, prefer m4a, fallback to best
+-f bestaudio[ext=m4a]/bestaudio/best
+
+# Extract audio only, keep as m4a (no conversion)
+-x --audio-format m4a --audio-quality 0
+
+# ─────────────────────────────
+# Metadata & Thumbnails
+# ─────────────────────────────
+--embed-thumbnail
+--embed-metadata
+--add-metadata
+
+# ─────────────────────────────
+# File Naming
+# ─────────────────────────────
+# Save as: ~/Music/Artist/Track.m4a
+# If artist missing, use "Unknown Artist"
+-o "~/Music/youtube/%(artist,Unknown Artist)s/%(title)s.%(ext)s"
+
+# ─────────────────────────────
+# Duplicates & Errors
+# ─────────────────────────────
+# Keep track of downloaded files
+# --download-archive ~/.config/yt-dlp/archive.txt
+
+# Restrict filenames to safe characters
+# --restrict-filenames
+
+# Keep going even if some items fail
+--ignore-errors
+
+# Download whole playlist if URL is a playlist
+--yes-playlist
+
+# ─────────────────────────────
+# Post Processing
+# ─────────────────────────────
+# Convert Simplified → Traditional Chinese for file names & tags
+--exec "~/.config/yt-dlp/postprocess_traditional.sh {}"

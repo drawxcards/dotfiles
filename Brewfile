@@ -13,6 +13,9 @@ brew 'dust'
 brew 'gnupg'
 brew 'eza' # modern replacement for ls with better features
 brew 'fzf'
+brew 'opencc'
+brew 'eye-d3'
+brew 'yt-dlp'
 
 # Essential Development Tools
 brew 'gh' # GitHub CLI

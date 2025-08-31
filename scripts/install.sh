@@ -252,6 +252,35 @@ if prompt_user "Create symlinks for configuration files?"; then
     execute defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
     print_status "iTerm2 preferences configured"
 
+    # yt-dlp configuration
+    # Create .config/yt-dlp directory if it doesn't exist
+    if ! $DRY_RUN && [ ! -d "$HOME/.config/yt-dlp" ]; then
+        execute mkdir -p "$HOME/.config/yt-dlp"
+        print_status "Created yt-dlp config directory: $HOME/.config/yt-dlp"
+    elif $DRY_RUN; then
+        print_dry_run "Would create directory: $HOME/.config/yt-dlp"
+    fi
+
+    # Symlink yt-dlp config
+    create_symlink "$DOTFILES_DIR/yt-dlp/config" "$HOME/.config/yt-dlp/config"
+
+    # Symlink postprocess script and make it executable
+    create_symlink "$DOTFILES_DIR/yt-dlp/postprocess_traditional.sh" "$HOME/.config/yt-dlp/postprocess_traditional.sh"
+    if ! $DRY_RUN; then
+        execute chmod +x "$HOME/.config/yt-dlp/postprocess_traditional.sh"
+        print_status "Made postprocess script executable"
+    else
+        print_dry_run "Would make postprocess script executable"
+    fi
+
+    # Create download archive file if it doesn't exist
+    if ! $DRY_RUN && [ ! -f "$HOME/.config/yt-dlp/archive.txt" ]; then
+        execute touch "$HOME/.config/yt-dlp/archive.txt"
+        print_status "Created download archive file: $HOME/.config/yt-dlp/archive.txt"
+    elif $DRY_RUN; then
+        print_dry_run "Would create download archive file: $HOME/.config/yt-dlp/archive.txt"
+    fi
+
     print_status "All symlinks created successfully"
 else
     print_warning "Skipping symlinks creation"
@@ -315,6 +344,8 @@ symlink_targets=(
     "$HOME/.functions:$DOTFILES_DIR/shell/.functions"
     "$HOME/.history:$DOTFILES_DIR/shell/.history"
     "$HOME/.iterm2/com.googlecode.iterm2.plist:$DOTFILES_DIR/terminal/iterm2/com.googlecode.iterm2.plist"
+    "$HOME/.config/yt-dlp/config:$DOTFILES_DIR/yt-dlp/config"
+    "$HOME/.config/yt-dlp/postprocess_traditional.sh:$DOTFILES_DIR/yt-dlp/postprocess_traditional.sh"
 )
 
 for target_pair in "${symlink_targets[@]}"; do

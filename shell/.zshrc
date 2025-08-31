@@ -33,8 +33,8 @@ autoload -Uz compinit && compinit
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
-# History search
-bindkey '^R' history-incremental-search-backward
+# History search - commented out to avoid conflict with fzf's ^R binding
+# bindkey '^R' history-incremental-search-backward
 
 # Load dotfiles configuration
 [[ -f ~/.dotfiles/shell/.history ]] && source ~/.dotfiles/shell/.history
