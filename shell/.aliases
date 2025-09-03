@@ -17,7 +17,7 @@ alias lrt='eza -l --sort newest'
 alias lart='eza -la --sort newest'
 
 # SSH and security
-SSH_KEY_PATH="${SSH_KEY_PATH:-$HOME/.ssh/id_rsa.pub}"
+SSH_KEY_PATH="${SSH_KEY_PATH:-$HOME/.ssh/draco.pub}"
 alias pubkey="more \"$SSH_KEY_PATH\" | pbcopy | echo '=> Public key copied to pasteboard.'"
 
 # Fzf integration
