@@ -675,7 +675,7 @@
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
-			<integer>8</integer>
+			<integer>9</integer>
 			<key>Working Directory</key>
 			<string>/Users/draco</string>
 		</dict>
